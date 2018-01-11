@@ -1,6 +1,8 @@
 package com.aleandro.cursomc.resources;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +41,17 @@ public class CategoriaResource {
 	}
 	
 	//Metodo de update 
-	@RequestMapping(value="/{id}")
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Categoria obj,@PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
-
-	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 	
 }

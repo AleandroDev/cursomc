@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.aleandro.cursomc.services.exceptions.DataIntegrationException;
 import com.aleandro.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -21,4 +22,11 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 		
+	@ExceptionHandler(DataIntegrationException.class)
+	public ResponseEntity<StandardError> dataIntegraty(DataIntegrationException e, HttpServletRequest request){
+		
+		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
 }
