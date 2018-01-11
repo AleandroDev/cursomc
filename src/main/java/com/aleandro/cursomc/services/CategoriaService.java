@@ -1,10 +1,13 @@
 package com.aleandro.cursomc.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.aleandro.cursomc.domain.Categoria;
+import com.aleandro.cursomc.dto.CategoriaDTO;
 import com.aleandro.cursomc.repositories.CategoriaRepository;
 import com.aleandro.cursomc.services.exceptions.DataIntegrationException;
 import com.aleandro.cursomc.services.exceptions.ObjectNotFoundException;
@@ -45,5 +48,8 @@ public class CategoriaService {
 			throw new DataIntegrationException("Não é possível excluir um categoria que possui produtos");
 		}
 	}
-
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
+	}
 }
