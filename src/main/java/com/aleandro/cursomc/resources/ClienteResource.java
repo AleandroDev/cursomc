@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aleandro.cursomc.domain.Cliente;
 import com.aleandro.cursomc.dto.ClienteDTO;
+import com.aleandro.cursomc.dto.ClienteNewDto;
 import com.aleandro.cursomc.services.ClienteService;
 
 @RestController
@@ -38,8 +39,8 @@ public class ClienteResource {
 	
 	//metodo insert do serviço
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto){ //@RequestBody, faz o Json ser convertido para o java automaticamente.
-		Cliente obj = service.fromCliente(objDto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto objDto){ //@RequestBody, faz o Json ser convertido para o java automaticamente.
+		Cliente obj = service.fromDto(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest() //retorna URI com o id do request
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -49,7 +50,7 @@ public class ClienteResource {
 	//Metodo de update 
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto,@PathVariable Integer id){
-		Cliente obj = service.fromCliente(objDto);
+		Cliente obj = service.fromDto(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
