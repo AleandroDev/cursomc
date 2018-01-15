@@ -9,10 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+
 import com.aleandro.cursomc.domain.Categoria;
 import com.aleandro.cursomc.dto.CategoriaDTO;
 import com.aleandro.cursomc.repositories.CategoriaRepository;
 import com.aleandro.cursomc.services.exceptions.DataIntegrationException;
+
 import com.aleandro.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,8 +35,10 @@ public class CategoriaService {
 	
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
+		
 		return repo.save(obj);
 	}
+		
 	
 	public Categoria update(Categoria obj) {
 		find(obj.getId());

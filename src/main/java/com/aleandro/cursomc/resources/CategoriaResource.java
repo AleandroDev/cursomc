@@ -54,7 +54,7 @@ public class CategoriaResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
+	//Metodo de delete
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
@@ -65,14 +65,14 @@ public class CategoriaResource {
 	//Buscar todas as categorias, foi feito um DTO para retornar somente os categorias e nao seus produtos.
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
-		
-		
+				
 		List<Categoria> list = service.findAll();
 		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	//Paginação
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 						@RequestParam(value="page", defaultValue="0") Integer page, 
