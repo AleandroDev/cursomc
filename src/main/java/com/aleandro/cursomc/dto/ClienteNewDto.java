@@ -2,12 +2,27 @@ package com.aleandro.cursomc.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.aleandro.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDto  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento Obrigatorio")
+	@Length(min=5,max=80,message="O Tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
+	@Email(message="E-mail incorreto!")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
 	public Integer getTipo() {
@@ -18,14 +33,24 @@ public class ClienteNewDto  implements Serializable{
 		this.tipo = tipo;
 	}
 
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String logradouro;
+	
 	private String numero;
+	
 	private String complemento;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento Obrigatorio")
 	private String telefone1;
+	
 	private String telefone2;
+	
 	private String telefone3;
 	
 	private Integer cidadeId;
