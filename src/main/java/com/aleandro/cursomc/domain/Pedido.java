@@ -171,9 +171,11 @@ public class Pedido  implements Serializable{
 		builder.append(", Situação do pagamento: ");
 		builder.append(getPagamento().getEstado().getDescricao());
 		builder.append("\nDetalhes:\n");
+		
 		for(ItemPedido ip : getItens()) {
 			builder.append(ip.toString());
 		}
+		
 		builder.append("Valor Total: ");
 		builder.append(nf.format(getValorTotal()));
 		return builder.toString();
